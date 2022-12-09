@@ -1,0 +1,174 @@
+connect:
+  datasource:
+    - dbSourceId: "ds_oracle_1"
+      driverClassName: 'oracle.jdbc.driver.OracleDriver'
+      jdbcUrl: 'jdbc:oracle:thin:@10.10.10.80:1521:ORCL'
+      username: 'zgtest_user'
+      password: '123456'
+    - dbSourceId: "ds_oracle_2"
+      driverClassName: 'oracle.jdbc.driver.OracleDriver'
+      jdbcUrl: 'jdbc:oracle:thin:@10.10.10.3:1521:LAB'
+      username: 'zgtest_user'
+      password: '123456'
+    - dbSourceId: "ds_oracle_3"
+      driverClassName: 'oracle.jdbc.driver.OracleDriver'
+      jdbcUrl: 'jdbc:oracle:thin:@10.10.10.176:1521:NC'
+      username: 'nc_tmp'
+      password: '123456'
+db-event-info:
+  redis_list:
+    - db_source_id: 'ds_oracle_1'
+      code: "IR_CC_CC_9"
+      interval: 120
+      sql:
+        template: "SELECT * FROM ( SELECT %fields% FROM TB_G5_CC902 t1 LEFT JOIN TB_G5_CC904 t2 on (t1.PLAN_NO = t2.PLAN_NO) ORDER BY t1.toc DESC ) x WHERE 1 = 1 %filter%"
+        fields: "t1.HEAT_ID AS HTNO, t1.CAST_ID, cast(t1.CAST_SEQ as integer) as CAST_SEQ, t1.CAST_TOTAL_TIME AS TOTAL_TIME, t1.CAST_REMAIN_TIME AS REMAIN_TIME, t1.CAST_TOTAL_LENGTH AS TOTAL_LENGTH, 0 AS CASTING_SPEED, t1.CASTING_SPEED_1, t1.CASTING_SPEED_2, t1.CASTING_SPEED_3, t1.CASTING_SPEED_4, t1.CASTING_SPEED_5, TO_NUMBER(t1.LADLE_STEEL_WEIGHT) / 1000 AS LADLE_WT, TO_NUMBER(t1.TUNDISH_STEEL_WEIGHT) / 1000 AS TUNDISH_WEIGHT, t1.TUNDISH_TEMP, t1.TOC, t2.SLAB_DM_GRADE as DM_MIAN"
+        filter: "AND ROWNUM =1"
+      redis:
+        "[IR:RTD:CC9.S0:REMAIN_TIME]": '{ROW:REMAIN_TIME:INT}'
+        "[IR:RTD:CC9.S0:TOTAL_TIME]": '{ROW:TOTAL_TIME:DOUBLE}'
+        "[IR:RTD:CC9.S0:REMAIN_TIME_TS]": '{NOW:REMAIN_TIME_TS}'
+        "[IR:RTD:CC9.S0:TUNDISH_TEMP]": '{ROW:TUNDISH_TEMP}'
+  select_list:
+    - db_source_id: 'ds_oracle_1'
+      events:
+#        - code: 'BLT_LGGPGL_SYN'
+#          interval: 6
+#          sql:
+#            tableName: "ycshow.V_YCZGMES_GPGL_SYN"
+#            fields: UPDATEDATE,step1 as "step1",type1 as "type1",flag1 as "flag1",send_code as "id",send_code as "sendCode",htno_a as "htnoA",htno as "htno",htno_d as "htnoD",steel_stock_code as "steelStockCode",steel_stock_name as "steelStockName",pline as "pline",stkblt_code as "stkbltCode",stkblt_name as "stkbltName",steel_code as "steelCode",to_char(send_at,'yyyyMMdd HH24:mi:ss') as "sendAt",trspt_type1 as "trsptType1",blt_type as "bltType",blt_spcfct as "bltSpcfct",blt_wgt as "bltWgt",blt_fx_lgt as "bltFxLgt", htno_count as "htnoCount",htno_hot_count as "htnoHotCount",htno_cold_count as "htnoColdCount",trspt_type as "trsptType",blt_count as "bltCount",blt_amount_wgt as "bltAmountWgt",produced_at as "producedAt",mat_code as "matCode",mat_name as "matName",car_no as "carNo",blt_abnormal_info as "bltAbnormalInfo",car_name as "carName",short_count as "shortCount",short_wgt as "shortWgt",short_need as "shortNeed"
+#            where: "UPDATEDATE > to_date('%ts%','yyyy-mm-dd hh24:mi:ss')"
+#            order: 'UPDATEDATE ASC'
+#          ts: 'UPDATEDATE'
+#          remark: '炼钢发坯数据同步'
+#          type: 'single'
+#          destination: [ '{MQE:BLT_LGGPGL_SYN}' ]
+#          datas:
+#            event_vo_attribute:
+#              source: 'ycshow.V_YCZGMES_GPGL_SYN'
+#              sender: 'LG'
+#        - code: 'BLT_LGLC_SYN'
+#          interval: 6
+#          sql:
+#            tableName: "ycshow.V_YCZGMES_LZ1MAIN_SYN"
+#            fields: 'UPDATEDATE,id as "id",steel_code as "steelCode",steel_stock_code as "steelStockCode",steel_stock_name as "steelStockName",htno as "htno",blt_type as "bltType",blt_spcfct as "bltSpcfct",blt_wgt as "bltWgt",blt_fx_lgt as "bltFxLgt", blt_count as "bltCount",blt_amount_wgt as "bltAmountWgt",produced_at as "producedAt",mat_code as "matCode",mat_name as "matName"'
+#            where: "CREATEDATE > to_date('%ts%','yyyy-mm-dd hh24:mi:ss') or UPDATEDATE > to_date('%ts%','yyyy-mm-dd hh24:mi:ss')"
+#            order: 'UPDATEDATE ASC'
+#          ts: 'UPDATEDATE'
+#          remark: '炼钢炉次质量信息同步'
+#          type: 'single'
+#          destination: [ '{MQE:BLT_LGLC_SYN}' ]
+#          datas:
+#            event_vo_attribute:
+#              source: 'ycshow.V_YCZGMES_LZ1MAIN_SYN'
+#              sender: 'LG'
+#    - db_source_id: 'ds_oracle_2'
+#      events:
+#        - code: 'QA_INSPECTRSP_EVENT'
+#          interval: 6
+#          sql:
+#            tableName: "dl_mid.TAI_LG_LABRESULTS_ZB"
+#            fields: "*"
+#            where: "MADETAG='3' and GDATETIME > to_date('%ts%','yyyy-mm-dd hh24:mi:ss')"
+#            order: 'GDATETIME ASC'
+#          ts: 'GDATETIME'
+#          remark: '化学实绩接收主子表记录'
+#          type: 'hasChildren'
+#          children:
+#            tableName: 'dl_mid.TAI_LG_LABRESULTS_MX'
+#            fields: "*"
+#            where: 'ID = %{PRE_ROW:ID}%'
+#          datas:
+#            event_vo_attribute:
+#              source: 'TAI_LG_LABRESULTS_ZB'
+#              sender: 'LIMS'
+#          destination: [ '{MQE:QA_INSPECTRSP_EVENT}' ]
+#        - code: 'QA_LX_INSPECTRSP_BC_EVENT'
+#          interval: 6
+#          sql:
+#            tableName: "dl_mid.TAI_JZL_ZL_GHCPJYZB"
+#            fields: "*"
+#            where: " FXSJ > to_date('%ts%','yyyy-mm-dd hh24:mi:ss')"
+#            order: 'FXSJ ASC'
+#          ts: 'FXSJ'
+#          remark: '棒材力学实绩接收主子表记录'
+#          type: 'hasChildren'
+#          children:
+#            tableName: 'dl_mid.TAI_JZL_ZL_GHCPJYMX'
+#            fields: "*"
+#            where: 'JYID = %{PRE_ROW:JYID}%'
+#          datas:
+#            event_vo_attribute:
+#              source: 'TAI_LG_LABRESULTS_ZB'
+#              sender: 'LIMS'
+#          destination: [ '{MQE:QA_LX_INSPECTRSP_BC_EVENT}' ]
+#        - code: 'QA_LX_INSPECTRSP_GX_EVENT'
+#          interval: 6
+#          sql:
+#            tableName: "dl_mid.TAI_JZL_ZL_GHCPJYZB_GX"
+#            fields: "*"
+#            where: " FXSJ > to_date('%ts%','yyyy-mm-dd hh24:mi:ss')"
+#            order: 'FXSJ ASC'
+#          ts: 'FXSJ'
+#          remark: '高线力学实绩接收主子表记录'
+#          type: 'hasChildren'
+#          children:
+#            tableName: 'dl_mid.TAI_JZL_ZL_GHCPJYMX_GX'
+#            fields: "*"
+#            where: 'JYID = %{PRE_ROW:JYID}%'
+#          datas:
+#            event_vo_attribute:
+#              source: 'TAI_LG_LABRESULTS_ZB'
+#              sender: 'LIMS'
+#          destination: [ '{MQE:QA_LX_INSPECTRSP_GX_EVENT}' ]
+    - db_source_id: 'ds_oracle_3'
+      events:
+        - code: 'PLAN_NC_SCGD_JK_SYN'
+          interval: 6
+          sql:
+            tableName: "NC6501.V_XGT_JK_SCGD"
+            fields: "moid AS GDID, mocode AS GDH,invcode AS WLBM,cinvname AS WLMC,cinvstd AS GG,gz AS GZ,qty AS SCSL,startdate AS KSSJ,duedate AS JSSJ,gdlx AS GDLX,'' as lh,TO_NUMBER(invcode) AS WLID,TO_NUMBER(status) AS GDZT,CLOSETIME as GBSJ,RELSDATE as SXSJ,ZXBZ as ZXBZ, QTY as QTY, MODID, 0 QUALIFIEDINQTY,jldwcode AS CCOMUNITCODE,jldw AS CCOMUNITNAME, QTY IINVQTY,DBNAME AS ZTXX,CKBM as CKBM, CK as CKMC, cdeptid as BMBM, BMMC as BMMC,TO_NUMBER(SORTSEQ) SORTSEQ,DC,JLFS,cpmc as cpmc,zxbz as JSBZ, xkzh as xkzh,TO_NUMBER(jysx) as jysx,bpdm as bpdm, pktype as pktype, CPMOHID as CPMOHID,CMOID as CMOID, CTRANTYPEID as GDLXPK, GDLXBM as GDLXBM, BOMID as BOMID,BOMSION as BOMSION,zb_ts,mx_ts,tbnr"
+            where: "to_date(ZB_TS, 'yyyy-mm-dd hh24:mi:ss') > to_date('%ts%','yyyy-mm-dd hh24:mi:ss') and RELSDATE is not null and to_date(RELSDATE,'yyyy-mm-dd hh24:mi:ss') >= sysdate -30"
+            order: "to_date(ZB_TS, 'yyyy-mm-dd hh24:mi:ss') ASC"
+          ts: 'ZB_TS'
+          remark: 'nc生产工单同步信号'
+          type: 'single'
+          destination: [ '{MQE:PLAN_NC_SCGD_JK_SYN}' ]
+          datas:
+            event_vo_attribute:
+              source: 'NC6501.sc_scgd_jk'
+              sender: 'VEDGE'
+  iup_list:
+    - db_source_id: 'ds_oracle_1'
+      events:
+        - code: 'UPDATE_LG_GPGL_INFO'
+          remark: '炼钢发坯回写'
+          iup: 'update'
+          sql:
+            tableName: 'YCSHOW.T_GPGL_M_ZGTEST'
+            fields: "STEP = '%step%', STAUST = '%staust%', SD_ZG_QR = '%sdZgQr%', ZS_C = '%zsC%', UPDATEDATE = to_date('%updateDate%','yyyy-mm-dd hh24:mi:ss'), UPDATEBY = '%updateBy%'"
+            where: "LZID = %lzid% AND TYPE = %type% AND FLAG = %flag%"
+    - db_source_id: 'ds_oracle_2'
+      events:
+        - code: 'QULITY_DELEGATION_BC'
+          remark: '棒材力学检验委托下发'
+          iup: 'insert'
+          sql:
+            tableName: 'dl_mid.TAI_JZL_ZL_GHWTZB_ZGTEST'
+            fields: 'BB,BC,GDH,GG,GZBM,GZMC,JYLX,LCH,LYDW,PH,WLBM,WLMS,WTBH,WTID,WTLX,WTSJ,ZFBZ,ZTBZ,ZXTJ,ZZPH'
+            values: "'%BB%','%BC%','%GDH%','%GG%','%GZBM%','%GZMC%',%JYLX%,'%LCH%','%LYDW%','%PH%','%WLBM%','%WLMS%','%WTBH%',%WTID%,%WTLX%,to_date('%WTSJ%','yyyy-mm-dd hh24:mi:ss'),%ZFBZ%,%ZTBZ%,'%ZXTJ%','%ZZPH%'"
+          children:
+            tableName: 'dl_mid.TAI_JZL_ZL_GHWTMX_ZGTEST'
+            fields: "JCXMBM,JCXMMS,JCXMSX,JYLX,QJSX,QJXX,WTID,WTMXID"
+            values: "'%JCXMBM%','%JCXMMS%','%JCXMSX%','%JYLX%',%QJSX%,%QJXX%,%WTID%,%WTMXID%"
+        - code: 'QULITY_DELEGATION_GX'
+          remark: '高线力学检验委托下发'
+          iup: 'insert'
+          sql:
+            tableName: 'dl_mid.TAI_JZL_ZL_GHWTZB_GX_ZGTEST'
+            fields: 'BB,BC,GDH,GG,GZBM,GZMC,JYLX,LCH,LYDW,PH,WLBM,WLMS,WTBH,WTID,WTLX,WTSJ,ZFBZ,ZTBZ,ZXTJ,ZZPH'
+            value: "'%BB%','%BC%','%GDH%','%GG%','%GZBM%','%GZMC%',%JYLX%,'%LCH%','%LYDW%','%PH%','%WLBM%','%WLMS%','%WTBH%',%WTID%,%WTLX%,to_date('%WTSJ%','yyyy-mm-dd hh24:mi:ss'),%ZFBZ%,%ZTBZ%,'%ZXTJ%','%ZZPH%'"
+          children:
+            tableName: 'dl_mid.TAI_JZL_ZL_GHWTMX_GX_ZGTEST'
+            fields: "JCXMBM,JCXMMS,JCXMSX,JYLX,QJSX,QJXX,WTID,WTMXID"
+            value: "'%JCXMBM%','%JCXMMS%','%JCXMSX%','%JYLX%',%QJSX%,%QJXX%,%WTID%,%WTMXID%"

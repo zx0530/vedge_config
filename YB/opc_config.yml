@@ -1,0 +1,1260 @@
+opc-event-info:
+  list:
+    - interval: 800
+      tag_prefix: 'RT:ZG1'
+      opc_tags: [ 'YC_1','YC_10_B2','YC_10_B1','YC_10_B3','YC_10_B4','YC_10_B5','YC_18_B1','YC_10_B6','YC_10_B7','YC_10_B8','YC_10_B9','YC_10_B10','YC_18_B2','YC_10_B11','YC_18_B3','YC_18_B8','YC_10_B12','YC_18_B9','YC_18_B10','YC_10_B13','YC_18_B11','YC_10_B14','YC_10_B16','YC_10_B15','YC_1_B1','YC_1_5_B2','YC_1_B3','YC_1_B4','YC_1_B5','YC_1_B6','YC_1_B7','YC_1_B8','YC_1_B9','YC_1_B10','YC_1_B11','YC_1_B12','YC_1_B13','YC_1_B14','YC_1_B15','YC_1_B16','YC_1_B17','YC_1_B18','YC_1_B19','YC_1_B20','YC_3_B1','YC_3_B2','YC_3_B3','YC_3_B4','YC_1_B21','YC_1_B22','YC_1_B23','YC_1_B24','YC_1_B25','YC_1_B26','YC_1_B27','YC_1_B28','YC_1_B29','YC_1_B30','YC_1_B31','YC_1_B32','YC_1_B33','YC_1_B34','YC_1_B35','YC_1_B36','YC_1_B37','YC_1_B38','YC_1_B39','YC_1_B40','YC_4_B1','YC_4_B2','YC_4_B3','YC_4_B4','YC_1_B41','YC_1_5_B42','YC_1_B43','YC_1_B44','YC_1_B45','YC_1_B46','YC_1_B47','YC_1_B48','YC_1_B49','YC_1_B50','YC_1_B51','YC_1_B52','YC_1_B53','YC_1_B54','YC_1_B55','YC_1_B56','YC_1_B57','YC_1_B58','YC_1_B59','YC_1_B60','YC_1_B61','YC_1_B62','YC_1_B63','YC_1_B64','YC_1_B65','YC_1_B66','YC_50_B1','YC_50_B2','YC_50_B3','YC_50_B4','YC_50_B5','YC_50_B6','YC_50_B7','YC_50_B8','YC_50_B9','YC_50_B10','YC_50_B11','YC_50_B12','YC_50_B13','YC_5_B1','YC_5_B4','YC_5_B5','YC_5_B6','YC_2_B1','YC_2_B2','YC_2_B3','YC_2_B4','YC_2_B5','YC_2_B6','YC_2_B7','YC_2_B8','YC_2_B9','YC_2_B10','YC_2_B11','YC_2_B12','YC_2_B13','YC_2_B14','YC_2_B15','YC_2_B16','YC_2_B17','YC_2_B18','YC_2_B19','YC_2_B20','YC_2_B21','YC_2_B22','YC_2_B23','YC_2_B24','YC_2_B25','YC_2_B26','YC_2_B27','YC_18_B12','YC_3_B5','YC_3_B6','YC_4_B5','YC_4_B6','YC_5_B7','YC_5_B8','YC_2_B28','YC_2_B29','YC_2_B30','YC_2_B31','YC_2_B32','YC_2_B33','YC_5_B9','YC_5_B10','YC_5_B11','YC_5_B12','YC_5_B13','YC_5_B14','YC_5_B15','YC_5_B16','YC_5_B17','YC_5_B18','YC_5_B19','YC_5_B20','YC_5_B21','YC_5_B22','YC_5_B23','YC_5_B24','YC_5_B25','YC_5_B26','YC_5_B27','YC_5_B28','YC_5_B29','YC_5_B30','YC_5_B31','YC_5_B32','YC_5_B33','YC_5_B34','YC_5_B35','YC_5_B36','YC_5_B37','YC_5_B38','YC_5_B39','YC_5_B40' ]
+      events:
+        #一棒加热炉事件
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_FURNACE_IN_B1'
+          tag: 'YC_1'
+          remark: '一棒加热入炉'
+          destination: [ '{MQE:RESULT_FURNACE_IN_B1}' ]
+          datas:
+            string:
+              "IN_FURNACE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "IN_FURNACE_TEMPERATURE": '{RT:YC_18_B1}'
+              "BILLET_LENGTH": '{RT:YC_10_B6}'
+              "BILLET_WEIGHT": '{RT:YC_10_B7}'
+            visp_msg_attribute:
+              "group": 'YB'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_FURNACE_STEP_FORWARD_B1'
+          tag: 'YC_10_B9'
+          remark: '一棒加热炉步进+1信号'
+          destination: [ '{MQE:RESULT_FURNACE_STEP_FORWARD_B1}' ]
+          datas:
+            string:
+              "STEP_FORWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_FURNACE_STEP_BACKWARD_B1'
+          tag: 'YC_10_B10'
+          remark: '一棒加热炉步进-1信号'
+          destination: [ '{MQE:RESULT_FURNACE_STEP_BACKWARD_B1}' ]
+          datas:
+            string:
+              "STEP_BACKWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_FURNACE_OUT_B1'
+          tag: 'YC_10_B14'
+          remark: '一棒加热炉出炉信号'
+          destination: [ '{MQE:RESULT_FURNACE_OUT_B1}' ]
+          datas:
+            string:
+              "OUT_FURNACE_TEMPERATURE": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "OUT_FURNACE_AT": '{RT:YC_10_B16}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_FURNACE_IN_ROLLBACK_B1'
+          tag: 'YC_10_B8'
+          remark: '一棒加热炉入炉回退信号'
+          destination: [ '{MQE:RESULT_FURNACE_IN_ROLLBACK_B1}' ]
+          datas:
+            string:
+              "IN_FURNACE_ROLLBACK_AT": '{TMP:yyyyMMddHHmmssSSS}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_FURNACE_OUT_ROLLBACK_B'
+          tag: 'YC_10_B15'
+          remark: '一棒加热炉出炉回退信号'
+          destination: [ '{MQE:RESULT_FURNACE_OUT_ROLLBACK_B}' ]
+          datas:
+            string:
+              "OUT_FURNACE_ROLLBACK_AT": '{TMP:yyyyMMddHHmmssSSS}'
+        ##轧制事件
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_ROLLING_ROUTH_BITE_B1'
+          tag: 'YC_1_B1'
+          remark: '一棒粗轧咬钢信号'
+          destination: [ '{MQE:RESULT_ROLLING_ROUTH_BITE_B1}' ]
+          datas:
+            string:
+              "ROLLING_ROUGH_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "ROLLING_ROUGH_BITE_TEMPERATURE": '{RT:YC_1_5_B2}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_FLYING_SHEARING_ONE_B1'
+          tag: 'YC_3_B1'
+          remark: '一棒1#飞剪信号'
+          destination: [ '{MQE:RESULT_FLYING_SHEARING_ONE_B1}' ]
+          datas:
+            string:
+              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_3_B2}'
+              "FLYING_SHEARING_LAG_RATE": '{RT:YC_3_B3}'
+              "FLYING_SHEARING_LENGTH": '{RT:YC_3_B4}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_ROLLING_MEDIATE_BITE_B1'
+          tag: 'YC_1_B21'
+          remark: '一棒中轧咬钢信号'
+          destination: [ '{MQE:RESULT_ROLLING_MEDIATE_BITE_B1}' ]
+          datas:
+            string:
+              "ROLLING_MEDIATE_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "ROLLING_MEDIATE_BITE_TEMPERATURE": '{RT:YC_1_B22}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_FLYING_SHEARING_TWO_B1'
+          tag: 'YC_4_B1'
+          remark: '一棒2#飞剪信号'
+          destination: [ '{MQE:RESULT_FLYING_SHEARING_TWO_B1}' ]
+          datas:
+            string:
+              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_4_B2}'
+              "FLYING_SHEARING_LAG_RATE": '{RT:YC_4_B3}'
+              "FLYING_SHEARING_LENGTH": '{RT:YC_4_B4}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_ROLLING_FINISH_BITE_B1'
+          tag: 'YC_1_B41'
+          remark: '一棒精轧咬钢信号'
+          destination: [ '{MQE:RESULT_ROLLING_FINISH_BITE_B1}' ]
+          datas:
+            string:
+              "ROLLING_MEDIATE_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "ROLLING_MEDIATE_BITE_TEMPERATURE": '{RT:YC_1_5_B42}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_DOUBLE_RULER_START_B1'
+          tag: 'YC_5_B4'
+          remark: '一棒倍尺剪开始信号'
+          destination: [ '{MQE:RESULT_DOUBLE_RULER_START_B1}' ]
+          datas:
+            string:
+              "DOUBLE_RUlER_START_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            int:
+              "DIVIDED_NUMBER": '{RT:YC_2_B2}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_FLYING_SHEARING_THREE_B1'
+          tag: 'YC_5_B1'
+          remark: '一棒3#飞剪信号'
+          destination: [ '{MQE:RESULT_FLYING_SHEARING_THREE_B1}' ]
+          datas:
+            string:
+              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_1_5_B42}'
+              "FLYING_SHEARING_LAG_RATE": '{RT:YC_5_B5}'
+              "FLYING_SHEARING_LENGTH_SET": '{RT:YC_1_5_B42}'
+              "FLYING_SHEARING_LENGTH_ACTUAL": '{RT:YC_1_5_B42}'
+              "FLYING_SHEARING_COUNT": '{RT:YC_5_B6}'
+              "FLYING_SHEARING _NUMBER_SET": '{RT:YC_1_5_B42}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_DOUBLE_RULER_END_B1'
+          tag: 'YC_5_B4'
+          remark: '一棒倍尺剪结束信号'
+          destination: [ '{MQE:RESULT_DOUBLE_RULER_END_B1}' ]
+          datas:
+            string:
+              "DOUBLE_RUlER_END_AT": '{TMP:yyyyMMddHHmmssSSS}'
+        ##冷床事件
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_COOLING_BED_IN_B1'
+          tag: 'YC_2_B1'
+          remark: '一棒上冷床信号'
+          destination: [ '{MQE:RESULT_COOLING_BED_IN_B1}' ]
+          datas:
+            string:
+              "INTO_COOLING_BED_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "INTO_COOLING_BED_TEMPERATURE": '{RT:YC_2_B3}'
+            int:
+              "IN_COOLING_BED_NUMBER": '{RT:YC_2_B2}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_COOLING_BED_STEP_FORWARD_B1'
+          tag: 'YC_2_B4'
+          remark: '一棒冷床步进+1信号'
+          destination: [ '{MQE:RESULT_COOLING_BED_STEP_FORWARD_B1}' ]
+          datas:
+            string:
+              "STEP_FORWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_COOLING_BED_STEP_BACKWARD_B1'
+          tag: 'YC_2_B5'
+          remark: '一棒冷床步进-1信号'
+          destination: [ '{MQE:RESULT_COOLING_BED_STEP_BACKWARD_B1}' ]
+          datas:
+            string:
+              "STEP_BACKWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_COOLING_BED_OUT_B1'
+          tag: 'YC_2_B6'
+          remark: '一棒下冷床信号'
+          destination: [ '{MQE:RESULT_COOLING_BED_OUT_B1}' ]
+          datas:
+            string:
+              "OUT_COOLING_BED_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            int:
+              "OUT_COOLING_BED_NUMBER": '{RT:YC_2_B7}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_LAYOUT_CHAIN_LARGE_STEP_B1'
+#          tag: 'YC_2_B8'
+          tag: 'YC_Test1'
+          remark: '一棒排布链走大步信号'
+          destination: [ '{MQE:RESULT_LAYOUT_CHAIN_LARGE_STEP_B1}' ]
+          datas:
+            string:
+              "LARGE_STEP_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            int:
+              "LARGE_STEP_BELT_NUMBER": '{RT:YC_2_B10}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_SIZING_SHEARING_B1'
+          tag: 'YC_2_B11,YC_2_B13'
+          remark: '一棒定尺剪信号'
+          destination: [ '{MQE:RESULT_SIZING_SHEARING_B1}' ]
+          datas:
+            string:
+              "SIZING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "SIZING_SHEARING_LENGTH": '12'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_SIZING_SHEARING_B1'
+          tag: 'YC_2_B12,YC_2_B13'
+          remark: '一棒定尺剪信号'
+          destination: [ '{MQE:RESULT_SIZING_SHEARING_B1}' ]
+          datas:
+            string:
+              "SIZING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "SIZING_SHEARING_LENGTH": '9'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_HOOK_STEEL_ONE_B1'
+          tag: 'YC_2_B18'
+          remark: '一棒1#收集台钩钢信号'
+          destination: [ '{MQE:RESULT_HOOK_STEEL_ONE_B1}' ]
+          datas:
+            string:
+              "HOOK_STEEL_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            int:
+              "COUNT_BLT_NUMBER": '{RT:YC_2_B10}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_HOOK_STEEL_TWO_B1'
+          tag: 'YC_2_B19'
+          remark: '一棒2#收集台钩钢信号'
+          destination: [ '{MQE:RESULT_HOOK_STEEL_TWO_B1}' ]
+          datas:
+            string:
+              "HOOK_STEEL_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            int:
+              "COUNT_BLT_NUMBER": '{RT:YC_2_B10}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_BUNDING_ONE_B1'
+          tag: 'YC_2_B20'
+          remark: '一棒1#打捆信号'
+          destination: [ '{MQE:RESULT_BUNDING_ONE_B1}' ]
+          datas:
+            string:
+              "BUNDING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            int:
+              "BELT_SOURCE": '1'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_BUNDING_ONE_B1'
+          tag: 'YC_2_B23'
+          remark: '一棒1#打捆信号'
+          destination: [ '{MQE:RESULT_BUNDING_ONE_B1}' ]
+          datas:
+            string:
+              "BUNDING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            int:
+              "BELT_SOURCE": '1'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_BUNDING_TWO_B1'
+          tag: 'YC_2_B21'
+          remark: '一棒2#打捆信号'
+          destination: [ '{MQE:RESULT_BUNDING_TWO_B1}' ]
+          datas:
+            string:
+              "BUNDING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            int:
+              "BELT_SOURCE": '2'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_BUNDING_TWO_B2'
+          tag: 'YC_2_B21'
+          remark: '一棒2#打捆信号'
+          destination: [ '{MQE:RESULT_BUNDING_TWO_B1}' ]
+          datas:
+            string:
+              "BUNDING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            int:
+              "BELT_SOURCE": '2'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'BLT_ELEVATOR_UP_B1'
+          tag: 'YC_10_B2'
+          remark: '一棒提升机提升信号'
+          destination: [ '{MQE:BLT_ELEVATOR_UP_B1}' ]
+          datas:
+            string:
+              "ELEVATOR_UP_AT": '{TMP:yyyyMMddHHmmssSSS}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'BLT_STORE_PUSH_B1'
+          tag: 'YC_10_B1'
+          remark: '一棒推钢信号'
+          destination: [ '{MQE:BLT_STORE_PUSH_B1}' ]
+          datas:
+            string:
+              "STORE_PUSH_AT": '{TMP:yyyyMMddHHmmssSSS}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'BLT_REMOVE_WASTE_B1'
+          tag: 'YC_10_B3'
+          remark: '一棒剔废信号'
+          destination: [ '{MQE:BLT_REMOVE_WASTE_B1}' ]
+          datas:
+            string:
+              "REMOVE_WASTE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_COLLECTION_TABLE_IN_B1'
+          tag: 'YC_2_B14,YC_2_B16'
+          remark: '一棒上收集台信号'
+          destination: [ '{MQE:RESULT_COLLECTION_TABLE_IN_B1}' ]
+          datas:
+            string:
+              "INTO_COLLECTION_TABLE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "COOLING_BED_NO": '1'
+        - trigger: '#oldData.value == false and #newData.value == true'
+          code: 'RESULT_COLLECTION_TABLE_IN_B1'
+          tag: 'YC_2_B15,YC_2_B17'
+          remark: '一棒上收集台信号'
+          destination: [ '{MQE:RESULT_COLLECTION_TABLE_IN_B1}' ]
+          datas:
+            string:
+              "INTO_COLLECTION_TABLE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+            double:
+              "COOLING_BED_NO": '2'
+
+
+
+
+
+
+
+#    - interval: 800
+#      tag_prefix: 'RT:ZG2'
+#      opc_tags: ['YC_1','YC_2','YC_3','YC_4','YC_5','YC_6','YC_7','YC_8','YC_9','YC_10','YC_11','YC_12','YC_13','YC_14','YC_15','YC_16','YC_17','YC_18','YC_19','YC_20','YC_21','YC_22','YC_23','YC_24','YC_25','YC_26','YC_27','YC_28','YC_29','YC_30','YC_31','YC_32','YC_5_B42','YC_201_B1','YC_201_B2','YC_201_B3','YC_201_B4','YC_201_B5','YC_01_C6','YC_201_B16','YC_201_B6','YC_201_B7','YC_201_B8','YC_201_B9','YC_201_B10','YC_202_B2','YC_201_B11','YC_202_B3','YC_202_B4','YC_202_B5','YC_202_B6','YC_202_B7','YC_202_B8','YC_201_B12','YC_202_B9','YC_202_B10','YC_201_B13','YC_202_B11','YC_201_B14','YC_201_B15','YC_1_B1','YC_1_B2','YC_1_B3','YC_1_B4','YC_1_B5','YC_1_B6','YC_1_B7','YC_1_B8','YC_1_B9','YC_1_B10','YC_1_B11','YC_1_B12','YC_1_B13','YC_1_B14','YC_1_B15','YC_1_B16','YC_1_B17','YC_1_B18','YC_1_B19','YC_1_B20','YC_3_B1','YC_3_B2','YC_3_B3','YC_3_B4','YC_1_B21','YC_1_B22','YC_1_B23','YC_1_B24','YC_1_B25','YC_1_B26','YC_1_B27','YC_1_B28','YC_1_B29','YC_1_B30','YC_1_B31','YC_1_B32','YC_1_B33','YC_1_B34','YC_1_B35','YC_1_B36','YC_1_B37','YC_1_B38','YC_1_B39','YC_1_B40','YC_4_B1','YC_4_B2','YC_4_B3','YC_4_B4','YC_1_B41','YC_1_B42','YC_1_B43','YC_1_B44','YC_1_B45','YC_1_B46','YC_1_B47','YC_1_B48','YC_1_B49','YC_1_B50','YC_1_B51','YC_1_B52','YC_1_B53','YC_1_B54','YC_1_B55','YC_1_B56','YC_1_B57','YC_1_B58','YC_1_B59','YC_1_B60','YC_3_B5','YC_3_B6','YC_3_B7','YC_2_B1','YC_2_B2','YC_6_B1','YC_2_B3','YC_2_B4','YC_2_B5','YC_2_B6','YC_2_B7','YC_2_B8','YC_2_B9','YC_2_B10','YC_2_B11','YC_2_B12','YC_2_B13','YC_2_B14','YC_2_B15','YC_2_B16','YC_2_B17','YC_2_B18','YC_2_B19','YC_2_B20','YC_2_B21','YC_2_B22','YC_2_B23','YC_202_B12','YC_4_B5','YC_4_B6','YC_3_B8','YC_3_B9','YC_2_B24','YC_2_B25','YC_2_B26','YC_2_B27','YC_1_B61','YC_2_B28','YC_2_B29','YC_3_B10','YC_3_B11','YC_3_B12','YC_3_B13','YC_3_B14','YC_3_B15','YC_3_B16','YC_3_B17','YC_3_B18','YC_3_B19','YC_3_B20','YC_3_B21','YC_3_B22','YC_3_B23','YC_3_B24','YC_3_B25','YC_3_B26','YC_3_B27','YC_3_B28','YC_3_B29','YC_3_B30','YC_3_B31','YC_3_B32','YC_3_B33','YC_3_B34','YC_3_B35','YC_3_B36','YC_3_B37','YC_3_B38','YC_3_B39','YC_3_B40','YC_3_B41','YC_2_B30' ]
+#      events:
+#        ##二棒加热炉事件
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_IN_B2'
+#          tag: 'YC_201_B5'
+#          remark: '二棒加热炉入炉信号'
+#          destination: [ '{MQE:RESULT_FURNACE_IN_B2}' ]
+#          datas:
+#            string:
+#              "IN_FURNACE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "IN_FURNACE_TEMPERATURE": '{RT:YC_201_B16}'
+#              "BILLET_LENGTH": '{RT:YC_201_B6}'
+#              "BILLET_WEIGHT": '{RT:YC_201_B7}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_STEP_FORWARD_B2'
+#          tag: 'YC_201_B9'
+#          remark: '二棒加热炉步进+1信号'
+#          destination: [ '{MQE:RESULT_FURNACE_STEP_FORWARD_B2}' ]
+#          datas:
+#            string:
+#              "STEP_FORWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_STEP_BACKWARD_B2'
+#          tag: 'YC_201_B10'
+#          remark: '二棒加热炉步进-1信号'
+#          destination: [ '{MQE:RESULT_FURNACE_STEP_BACKWARD_B2}' ]
+#          datas:
+#            string:
+#              "STEP_BACKWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_OUT_B2'
+#          tag: 'YC_201_B14'
+#          remark: '二棒加热炉出炉信号'
+#          destination: [ '{MQE:RESULT_FURNACE_OUT_B2}' ]
+#          datas:
+#            string:
+#              "OUT_FURNACE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "OUT_FURNACE_TEMPERATURE": '{RT:YC_1_B2}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_IN_ROLLBACK_B2'
+#          tag: 'YC_201_B8'
+#          remark: '二棒加热炉入炉回退信号'
+#          destination: [ '{MQE:RESULT_FURNACE_IN_ROLLBACK_B2}' ]
+#          datas:
+#            string:
+#              "IN_FURNACE_ROLLBACK_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_OUT_ROLLBACK_B2'
+#          tag: 'YC_201_B15'
+#          remark: '二棒加热炉出炉回退信号'
+#          destination: [ '{MQE:RESULT_FURNACE_OUT_ROLLBACK_B2}' ]
+#          datas:
+#            string:
+#              "OUT_FURNACE_ROLLBACK_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_ROUTH_BITE_B2'
+#          tag: 'YC_1_B1'
+#          remark: '二棒粗轧咬钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_ROUTH_BITE_B2}' ]
+#          datas:
+#            string:
+#              "ROLLING_ROUGH_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "ROLLING_ROUGH_BITE_TEMPERATURE": '{RT:YC_1_B2}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FLYING_SHEARING_ONE_B2'
+#          tag: 'YC_3_B1'
+#          remark: '二棒1#飞剪信号'
+#          destination: [ '{MQE:RESULT_FLYING_SHEARING_ONE_B2}' ]
+#          datas:
+#            string:
+#              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_3_B2}'
+#              "FLYING_SHEARING_LAG_RATE": '{RT:YC_3_B3}'
+#              "FLYING_SHEARING_LENGTH": '{RT:YC_3_B4}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_MEDIATE_BITE_B2'
+#          tag: 'YC_1_B21'
+#          remark: '二棒中轧咬钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_MEDIATE_BITE_B2}' ]
+#          datas:
+#            string:
+#              "ROLLING_MEDIATE_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "ROLLING_MEDIATE_BITE_TEMPERATURE": '{RT:YC_1_B22}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FLYING_SHEARING_TWO_B2'
+#          tag: 'YC_4_B1'
+#          remark: '二棒2#飞剪信号'
+#          destination: [ '{MQE:RESULT_FLYING_SHEARING_TWO_B2}' ]
+#          datas:
+#            string:
+#              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_4_B2}'
+#              "FLYING_SHEARING_LAG_RATE": '{RT:YC_4_B3}'
+#              "FLYING_SHEARING_LENGTH": '{RT:YC_4_B4}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_FINISH_BITE_B2'
+#          tag: 'YC_1_B41'
+#          remark: '二棒精轧咬钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_FINISH_BITE_B2}' ]
+#          datas:
+#            string:
+#              "ROLLING_MEDIATE_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "ROLLING_MEDIATE_BITE_TEMPERATURE": '{RT:YC_1_B42}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_DOUBLE_RULER_START_B2'
+#          tag: 'YC_3_B4'
+#          remark: '二棒倍尺剪开始信号'
+#          destination: [ '{MQE:RESULT_DOUBLE_RULER_START_B2}' ]
+#          datas:
+#            string:
+#              "DOUBLE_RUlER_START_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FLYING_SHEARING_THREE_B2'
+#          tag: 'YC_3_B1'
+#          remark: '二棒3#飞剪信号'
+#          destination: [ '{MQE:RESULT_FLYING_SHEARING_THREE_B2}' ]
+#          datas:
+#            string:
+#              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_3_B3}'
+#              "FLYING_SHEARING_LAG_RATE": '{RT:YC_3_B5}'
+#              "FLYING_SHEARING_LENGTH_SET": '{RT:YC_3_B6}'
+#              "FLYING_SHEARING_LENGTH_ACTUAL": '{RT:YC_5_B42}'
+#              "FLYING_SHEARING_COUNT": '{RT:YC_3_B7}'
+#        - trigger: '#oldData.value == true and #newData.value == false'
+#          code: 'RESULT_DOUBLE_RULER_END_B2'
+#          tag: 'YC_3_B4'
+#          remark: '二棒倍尺剪结束信号'
+#          destination: [ '{MQE:RESULT_DOUBLE_RULER_END_B2}' ]
+#          datas:
+#            string:
+#              "DOUBLE_RUlER_END_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COOLING_BED_IN_B2'
+#          tag: 'YC_2_B1'
+#          remark: '二棒上冷床信号'
+#          destination: [ '{MQE:RESULT_COOLING_BED_IN_B2}' ]
+#          datas:
+#            string:
+#              "INTO_COOLING_BED_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "INTO_COOLING_BED_TEMPERATURE": '{RT:YC_6_B1}'
+#            int:
+#              "IN_COOLING_BED_NUMBER": '{RT:YC_2_B2}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COOLING_BED_STEP_FORWARD_B2'
+#          tag: 'YC_2_B3'
+#          remark: '二棒冷床步进+1信号'
+#          destination: [ '{MQE:RESULT_COOLING_BED_STEP_FORWARD_B2}' ]
+#          datas:
+#            string:
+#              "STEP_FORWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COOLING_BED_STEP_BACKWARD_B2'
+#          tag: 'YC_2_B4'
+#          remark: '二棒冷床步进-1信号'
+#          destination: [ '{MQE:RESULT_COOLING_BED_STEP_BACKWARD_B2}' ]
+#          datas:
+#            string:
+#              "STEP_BACKWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COOLING_BED_OUT_B2'
+#          tag: 'YC_2_B5'
+#          remark: '二棒下冷床信号'
+#          destination: [ '{MQE:RESULT_COOLING_BED_OUT_B2}' ]
+#          datas:
+#            string:
+#              "OUT_COOLING_BED_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            int:
+#              "OUT_COOLING_BED_NUMBER": '{RT:YC_2_B2}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_LAYOUT_CHAIN_LARGE_STEP_B2'
+#          tag: 'YC_2_B7'
+#          remark: '二棒排布链走大步信号'
+#          destination: [ '{MQE:RESULT_LAYOUT_CHAIN_LARGE_STEP_B2}' ]
+#          datas:
+#            string:
+#              "LARGE_STEP_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "LARGE_STEP_BELT_NUMBER": '{RT:YC_2_B6}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_SIZING_SHEARING_B2'
+#          tag: 'YC_2_B8,YC_2_B10'
+#          remark: '二棒定尺剪信号'
+#          destination: [ '{MQE:RESULT_SIZING_SHEARING_B2}' ]
+#          datas:
+#            string:
+#              "SIZING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "SIZING_SHEARING_LENGTH": '12'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_SIZING_SHEARING_B2'
+#          tag: 'YC_2_B9,YC_2_B10'
+#          remark: '二棒定尺剪信号'
+#          destination: [ '{MQE:RESULT_SIZING_SHEARING_B2}' ]
+#          datas:
+#            string:
+#              "SIZING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "SIZING_SHEARING_LENGTH": '9'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COLLECTION_TABLE_IN_B2'
+#          tag: 'YC_2_B11,YC_2_B12'
+#          remark: '二棒上收集台信号'
+#          destination: [ '{MQE:RESULT_COLLECTION_TABLE_IN_B2}' ]
+#          datas:
+#            string:
+#              "INTO_COLLECTION_TABLE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "COOLING_BED_NO": '1'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COLLECTION_TABLE_IN_B2'
+#          tag: 'YC_2_B11,YC_2_B13'
+#          remark: '二棒上收集台信号'
+#          destination: [ '{MQE:RESULT_COLLECTION_TABLE_IN_B2}' ]
+#          datas:
+#            string:
+#              "INTO_COLLECTION_TABLE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "COOLING_BED_NO": '2'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_HOOK_STEEL_ONE_B2'
+#          tag: 'YC_2_B14'
+#          remark: '二棒1#收集台钩钢信号'
+#          destination: [ '{MQE:RESULT_HOOK_STEEL_ONE_B2}' ]
+#          datas:
+#            string:
+#              "HOOK_STEEL_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            int:
+#              "COUNT_BLT_NUMBER": '{RT:YC_2_B6}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_HOOK_STEEL_TWO_B2'
+#          tag: 'YC_2_B15'
+#          remark: '二棒2#收集台钩钢信号'
+#          destination: [ '{MQE:RESULT_HOOK_STEEL_ONE_B2}' ]
+#          datas:
+#            string:
+#              "HOOK_STEEL_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            int:
+#              "COUNT_BLT_NUMBER": '{RT:YC_2_B6}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_BUNDING_ONE_B2'
+#          tag: 'YC_2_B16'
+#          remark: '二棒1#打捆信号'
+#          destination: [ '{MQE:RESULT_BUNDING_ONE_B2}' ]
+#          datas:
+#            string:
+#              "BUNDING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#              "BELT_SOURCE": '1'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_BUNDING_ONE_B2'
+#          tag: 'YC_2_B19'
+#          remark: '二棒1#打捆信号'
+#          destination: [ '{MQQ:TEST_FURNACE_IN_B2}' ]
+#          datas:
+#            string:
+#              "BUNDING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#              "BELT_SOURCE": '1'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_BUNDING_TWO_B2'
+#          tag: 'YC_2_B17'
+#          remark: '二棒2#打捆信号'
+#          destination: [ '{MQQ:TEST_FURNACE_IN_B2}' ]
+#          datas:
+#            string:
+#              "BUNDING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#              "BELT_SOURCE": '2'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_BUNDING_TWO_B2'
+#          tag: 'YC_2_B18'
+#          remark: '二棒2#打捆信号'
+#          destination: [ '{MQQ:TEST_FURNACE_IN_B2}' ]
+#          datas:
+#            string:
+#              "BUNDING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#              "BELT_SOURCE": '2'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'BLT_ELEVATOR_UP_B2'
+#          tag: 'YC_201_B2'
+#          remark: '二棒提升机提升信号'
+#          destination: [ '{MQE:BLT_ELEVATOR_UP_B2}' ]
+#          datas:
+#            string:
+#              "ELEVATOR_UP_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'BLT_STORE_PUSH_B2'
+#          tag: 'YC_201_B1'
+#          remark: '二棒冷坯推钢信号'
+#          destination: [ '{MQE:BLT_STORE_PUSH_B2}' ]
+#          datas:
+#            string:
+#              "STORE_PUSH_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'BLT_REMOVE_WASTE_B2'
+#          tag: 'YC_201_B3'
+#          remark: '二棒剔废信号'
+#          destination: [ '{MQE:BLT_REMOVE_WASTE_B2}' ]
+#          datas:
+#            string:
+#              "REMOVE_WASTE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        ##测试事件
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_IN_B2'
+#          tag: 'YC_1'
+#          remark: '二棒加热炉入炉信号'
+#          destination: [ '{MQE:RESULT_FURNACE_IN_B2}' ]
+#          datas:
+#            string:
+#              "IN_FURNACE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "IN_FURNACE_TEMPERATURE": '{RT:YC_201_B16}'
+#              "BILLET_LENGTH": '{RT:YC_201_B6}'
+#              "BILLET_WEIGHT": '{RT:YC_201_B7}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_STEP_FORWARD_B2'
+#          tag: 'YC_2'
+#          remark: '二棒加热炉步进+1信号'
+#          destination: [ '{MQE:RESULT_FURNACE_STEP_FORWARD_B2}' ]
+#          datas:
+#            string:
+#              "STEP_FORWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_STEP_BACKWARD_B2'
+#          tag: 'YC_3'
+#          remark: '二棒加热炉步进-1信号'
+#          destination: [ '{MQE:RESULT_FURNACE_STEP_BACKWARD_B2}' ]
+#          datas:
+#            string:
+#              "STEP_BACKWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_OUT_B2'
+#          tag: 'YC_4'
+#          remark: '二棒加热炉出炉信号'
+#          destination: [ '{MQE:RESULT_FURNACE_OUT_B2}' ]
+#          datas:
+#            string:
+#              "OUT_FURNACE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "OUT_FURNACE_TEMPERATURE": '{RT:YC_1_B2}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_IN_ROLLBACK_B2'
+#          tag: 'YC_5'
+#          remark: '二棒加热炉入炉回退信号'
+#          destination: [ '{MQE:RESULT_FURNACE_IN_ROLLBACK_B2}' ]
+#          datas:
+#            string:
+#              "IN_FURNACE_ROLLBACK_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_OUT_ROLLBACK_B2'
+#          tag: 'YC_6'
+#          remark: '二棒加热炉出炉回退信号'
+#          destination: [ '{MQE:RESULT_FURNACE_OUT_ROLLBACK_B2}' ]
+#          datas:
+#            string:
+#              "OUT_FURNACE_ROLLBACK_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_ROUTH_BITE_B2'
+#          tag: 'YC_7'
+#          remark: '二棒粗轧咬钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_ROUTH_BITE_B2}' ]
+#          datas:
+#            string:
+#              "ROLLING_ROUGH_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "ROLLING_ROUGH_BITE_TEMPERATURE": '{RT:YC_1_B2}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FLYING_SHEARING_ONE_B2'
+#          tag: 'YC_8'
+#          remark: '二棒1#飞剪信号'
+#          destination: [ '{MQE:RESULT_FLYING_SHEARING_ONE_B2}' ]
+#          datas:
+#            string:
+#              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_3_B2}'
+#              "FLYING_SHEARING_LAG_RATE": '{RT:YC_3_B3}'
+#              "FLYING_SHEARING_LENGTH": '{RT:YC_3_B4}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_MEDIATE_BITE_B2'
+#          tag: 'YC_9'
+#          remark: '二棒中轧咬钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_MEDIATE_BITE_B2}' ]
+#          datas:
+#            string:
+#              "ROLLING_MEDIATE_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "ROLLING_MEDIATE_BITE_TEMPERATURE": '{RT:YC_1_B22}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FLYING_SHEARING_TWO_B2'
+#          tag: 'YC_10'
+#          remark: '二棒2#飞剪信号'
+#          destination: [ '{MQE:RESULT_FLYING_SHEARING_TWO_B2}' ]
+#          datas:
+#            string:
+#              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_4_B2}'
+#              "FLYING_SHEARING_LAG_RATE": '{RT:YC_4_B3}'
+#              "FLYING_SHEARING_LENGTH": '{RT:YC_4_B4}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_FINISH_BITE_B2'
+#          tag: 'YC_11'
+#          remark: '二棒精轧咬钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_FINISH_BITE_B2}' ]
+#          datas:
+#            string:
+#              "ROLLING_MEDIATE_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "ROLLING_MEDIATE_BITE_TEMPERATURE": '{RT:YC_1_B42}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_DOUBLE_RULER_START_B2'
+#          tag: 'YC_12'
+#          remark: '二棒倍尺剪开始信号'
+#          destination: [ '{MQE:RESULT_DOUBLE_RULER_START_B2}' ]
+#          datas:
+#            string:
+#              "DOUBLE_RUlER_START_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FLYING_SHEARING_THREE_B2'
+#          tag: 'YC_13'
+#          remark: '二棒3#飞剪信号'
+#          destination: [ '{MQE:RESULT_FLYING_SHEARING_THREE_B2}' ]
+#          datas:
+#            string:
+#              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_3_B3}'
+#              "FLYING_SHEARING_LAG_RATE": '{RT:YC_3_B5}'
+#              "FLYING_SHEARING_LENGTH_SET": '{RT:YC_3_B6}'
+#              "FLYING_SHEARING_LENGTH_ACTUAL": '{RT:YC_5_B42}'
+#              "FLYING_SHEARING_COUNT": '{RT:YC_3_B7}'
+#        - trigger: '#oldData.value == true and #newData.value == false'
+#          code: 'RESULT_DOUBLE_RULER_END_B2'
+#          tag: 'YC_14'
+#          remark: '二棒倍尺剪结束信号'
+#          destination: [ '{MQE:RESULT_DOUBLE_RULER_END_B2}' ]
+#          datas:
+#            string:
+#              "DOUBLE_RUlER_END_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COOLING_BED_IN_B2'
+#          tag: 'YC_15'
+#          remark: '二棒上冷床信号'
+#          destination: [ '{MQE:RESULT_COOLING_BED_IN_B2}' ]
+#          datas:
+#            string:
+#              "INTO_COOLING_BED_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "INTO_COOLING_BED_TEMPERATURE": '{RT:YC_6_B1}'
+#            int:
+#              "IN_COOLING_BED_NUMBER": '{RT:YC_2_B2}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COOLING_BED_STEP_FORWARD_B2'
+#          tag: 'YC_16'
+#          remark: '二棒冷床步进+1信号'
+#          destination: [ '{MQE:RESULT_COOLING_BED_STEP_FORWARD_B2}' ]
+#          datas:
+#            string:
+#              "STEP_FORWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COOLING_BED_STEP_BACKWARD_B2'
+#          tag: 'YC_17'
+#          remark: '二棒冷床步进-1信号'
+#          destination: [ '{MQE:RESULT_COOLING_BED_STEP_BACKWARD_B2}' ]
+#          datas:
+#            string:
+#              "STEP_BACKWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COOLING_BED_OUT_B2'
+#          tag: 'YC_18'
+#          remark: '二棒下冷床信号'
+#          destination: [ '{MQE:RESULT_COOLING_BED_OUT_B2}' ]
+#          datas:
+#            string:
+#              "OUT_COOLING_BED_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            int:
+#              "OUT_COOLING_BED_NUMBER": '{RT:YC_2_B2}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_LAYOUT_CHAIN_LARGE_STEP_B2'
+#          tag: 'YC_19'
+#          remark: '二棒排布链走大步信号'
+#          destination: [ '{MQE:RESULT_LAYOUT_CHAIN_LARGE_STEP_B2}' ]
+#          datas:
+#            string:
+#              "LARGE_STEP_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "LARGE_STEP_BELT_NUMBER": '{RT:YC_2_B6}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_SIZING_SHEARING_B2'
+#          tag: 'YC_20'
+#          remark: '二棒定尺剪信号'
+#          destination: [ '{MQE:RESULT_SIZING_SHEARING_B2}' ]
+#          datas:
+#            string:
+#              "SIZING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "SIZING_SHEARING_LENGTH": '12'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_SIZING_SHEARING_B2'
+#          tag: 'YC_21'
+#          remark: '二棒定尺剪信号'
+#          destination: [ '{MQE:RESULT_SIZING_SHEARING_B2}' ]
+#          datas:
+#            string:
+#              "SIZING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "SIZING_SHEARING_LENGTH": '9'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COLLECTION_TABLE_IN_B2'
+#          tag: 'YC_22'
+#          remark: '二棒上收集台信号'
+#          destination: [ '{MQE:RESULT_COLLECTION_TABLE_IN_B2}' ]
+#          datas:
+#            string:
+#              "INTO_COLLECTION_TABLE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "COOLING_BED_NO": '1'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COLLECTION_TABLE_IN_B2'
+#          tag: 'YC_23'
+#          remark: '二棒上收集台信号'
+#          destination: [ '{MQE:RESULT_COLLECTION_TABLE_IN_B2}' ]
+#          datas:
+#            string:
+#              "INTO_COLLECTION_TABLE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "COOLING_BED_NO": '2'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_HOOK_STEEL_ONE_B2'
+#          tag: 'YC_24'
+#          remark: '二棒1#收集台钩钢信号'
+#          destination: [ '{MQE:RESULT_HOOK_STEEL_ONE_B2}' ]
+#          datas:
+#            string:
+#              "HOOK_STEEL_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            int:
+#              "COUNT_BLT_NUMBER": '{RT:YC_2_B6}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_HOOK_STEEL_TWO_B2'
+#          tag: 'YC_25'
+#          remark: '二棒2#收集台钩钢信号'
+#          destination: [ '{MQE:RESULT_HOOK_STEEL_ONE_B2}' ]
+#          datas:
+#            string:
+#              "HOOK_STEEL_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            int:
+#              "COUNT_BLT_NUMBER": '{RT:YC_2_B6}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_BUNDING_ONE_B2'
+#          tag: 'YC_26'
+#          remark: '二棒1#打捆信号'
+#          destination: [ '{MQE:RESULT_BUNDING_ONE_B2}' ]
+#          datas:
+#            string:
+#              "BUNDING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#              "BELT_SOURCE": '1'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_BUNDING_ONE_B2'
+#          tag: 'YC_27'
+#          remark: '二棒1#打捆信号'
+#          destination: [ '{MQQ:TEST_FURNACE_IN_B2}' ]
+#          datas:
+#            string:
+#              "BUNDING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#              "BELT_SOURCE": '1'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_BUNDING_TWO_B2'
+#          tag: 'YC_28'
+#          remark: '二棒2#打捆信号'
+#          destination: [ '{MQQ:TEST_FURNACE_IN_B2}' ]
+#          datas:
+#            string:
+#              "BUNDING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#              "BELT_SOURCE": '2'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_BUNDING_TWO_B2'
+#          tag: 'YC_29'
+#          remark: '二棒2#打捆信号'
+#          destination: [ '{MQQ:TEST_FURNACE_IN_B2}' ]
+#          datas:
+#            string:
+#              "BUNDING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#              "BELT_SOURCE": '2'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'BLT_ELEVATOR_UP_B2'
+#          tag: 'YC_30'
+#          remark: '二棒提升机提升信号'
+#          destination: [ '{MQE:BLT_ELEVATOR_UP_B2}' ]
+#          datas:
+#            string:
+#              "ELEVATOR_UP_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'BLT_STORE_PUSH_B2'
+#          tag: 'YC_31'
+#          remark: '二棒冷坯推钢信号'
+#          destination: [ '{MQE:BLT_STORE_PUSH_B2}' ]
+#          datas:
+#            string:
+#              "STORE_PUSH_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'BLT_REMOVE_WASTE_B2'
+#          tag: 'YC_32'
+#          remark: '二棒剔废信号'
+#          destination: [ '{MQE:BLT_REMOVE_WASTE_B2}' ]
+#          datas:
+#            string:
+#              "REMOVE_WASTE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+
+
+
+
+
+
+#    - interval: 800
+#      tag_prefix: 'IR:RTD:ZG3'
+#      opc_tags: ['YC_10_B1','YC_10_B2','YC_10_B3','YC_10_B4','YC_10_B5','YC_10_B6','YC_10_B7','YC_10_B8','YC_10_B9','YC_10_B10','YC_10_B11','YC_10_B12','YC_10_B13','YC_10_B14','YC_10_B15','YC_10_B16','YC_10_B17','YC_10_B18','YC_1_B1','YC_10_B19','YC_1_B2','YC_1_B3','YC_1_B4','YC_1_B5','YC_1_B6','YC_1_B7','YC_1_B8','YC_1_B9','YC_1_B10','YC_1_B11','YC_1_B12','YC_1_B13','YC_1_B14','YC_1_B15','YC_1_B16','YC_1_B17','YC_1_B18','YC_11_B1','YC_11_B2','YC_11_B3','YC_11_B4','YC_11_B5','YC_1_B19','YC_1_B20','YC_2_B1','YC_2_B2','YC_2_B3','YC_2_B4','YC_2_B5','YC_2_B6','YC_2_B7','YC_2_B8','YC_2_B9','YC_2_B10','YC_2_B11','YC_2_B12','YC_2_B13','YC_2_B14','YC_2_B15','YC_2_B16','YC_2_B17','YC_2_B18','YC_2_B19','YC_2_B20','YC_2_B21','YC_2_B22','YC_2_B23','YC_2_B24','YC_2_B25','YC_2_B26','YC_2_B27','YC_12_B1','YC_12_B2','YC_12_B3','YC_12_B4','YC_14_B1','YC_14_B2','YC_14_B3','YC_14_B4','YC_2_B28','YC_2_B30','YC_2_B31','YC_2_B32','YC_2_B33','YC_2_B34','YC_2_B35','YC_2_B36','YC_2_B37','YC_2_B38','YC_2_B39','YC_2_B40','YC_2_B41','YC_2_B43','YC_2_B44','YC_2_B45','YC_2_B46','YC_2_B47','YC_2_B48','YC_2_B49','YC_2_B50','YC_2_B51','YC_2_B52','YC_2_B53','YC_2_B54','YC_2_B55','YC_2_B56','YC_2_B57','YC_2_B58','YC_2_B59','YC_2_B60','YC_2_B61','YC_2_B62','YC_2_B63','YC_2_B64','YC_2_B65','YC_2_B66','YC_2_B67','YC_2_B68','YC_2_B69','YC_2_B70','YC_2_B71','YC_2_B72','YC_2_B73','YC_2_B74','YC_2_B75','YC_2_B76','YC_2_B77','YC_13_B1','YC_13_B2','YC_13_B3','YC_13_B4','YC_15_B1','YC_15_B2','YC_15_B3','YC_15_B4','YC_2_B78','YC_2_B79','YC_2_B80','YC_2_B81','YC_2_B82','YC_2_B83','YC_2_B84','YC_2_B85','YC_2_B86','YC_2_B87','YC_2_B88','YC_2_B89','YC_2_B90','YC_2_B91','YC_2_B92','YC_2_B93','YC_2_B94','YC_2_B95','YC_2_B96','YC_2_B97','YC_2_B98','YC_2_B99','YC_2_B100','YC_2_B101','YC_2_B102','YC_2_B103','YC_2_B104','YC_2_B105','YC_2_B106','YC_2_B107','YC_2_B108','YC_2_B109','YC_2_B110','YC_2_B111','YC_2_B112','YC_2_B113','YC_2_B114','YC_2_B115','YC_2_B116','YC_2_B117','YC_2_B118','YC_2_B119','YC_2_B120','YC_2_B121','YC_2_B122','YC_2_B123','YC_2_B124','YC_2_B125']
+#      events:
+#        ##高线加热炉事件
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_IN_X1'
+#          tag: 'YC_10_B5'
+#          remark: '高线加热炉入炉信号'
+#          destination: [ '{MQE:RESULT_FURNACE_IN_X1}' ]
+#          datas:
+#            string:
+#              "IN_FURNACE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "IN_FURNACE_TEMPERATURE": '{RT:YC_10_B6}'
+#              "BILLET_LENGTH": '{RT:YC_10_B7}'
+#              "BILLET_WEIGHT": '{RT:YC_10_B8}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_STEP_FORWARD_X1'
+#          tag: 'YC_10_B9'
+#          remark: '高线加热炉步进+1信号'
+#          destination: [ '{MQE:RESULT_FURNACE_STEP_FORWARD_X1}' ]
+#          datas:
+#            string:
+#              "STEP_FORWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_STEP_BACKWARD_X1'
+#          tag: 'YC_10_B10'
+#          remark: '高线加热炉步进-1信号'
+#          destination: [ '{MQE:RESULT_FURNACE_STEP_BACKWARD_X1}' ]
+#          datas:
+#            string:
+#              "STEP_BACKWARD_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_OUT_X1'
+#          tag: 'YC_10_B18'
+#          remark: '高线加热炉出炉信号'
+#          destination: [ '{MQE:RESULT_FURNACE_OUT_X1}' ]
+#          datas:
+#            string:
+#              "OUT_FURNACE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "OUT_FURNACE_TEMPERATURE": '{RT:YC_1_B1}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_IN_ROLLBACK_X1'
+#          tag: 'YC_10_B11'
+#          remark: '高线加热炉入炉回退信号'
+#          destination: [ '{MQE:RESULT_FURNACE_IN_ROLLBACK_X1}' ]
+#          datas:
+#            string:
+#              "IN_FURNACE_ROLLBACK_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FURNACE_OUT_ROLLBACK_X1'
+#          tag: 'YC_10_B19'
+#          remark: '高线加热炉出炉回退信号'
+#          destination: [ '{MQE:RESULT_FURNACE_OUT_ROLLBACK_X1}' ]
+#          datas:
+#            string:
+#              "OUT_FURNACE_ROLLBACK_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_ROUTH_BITE_X1'
+#          tag: 'YC_1_B2'
+#          remark: '高线粗轧咬钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_ROUTH_BITE_X1}' ]
+#          datas:
+#            string:
+#              "ROLLING_ROUGH_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "ROLLING_ROUGH_BITE_TEMPERATURE": '{RT:YC_1_B3}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FLYING_SHEARING_ONE_X1'
+#          tag: 'YC_11_B1'
+#          remark: '高线1#飞剪信号'
+#          destination: [ '{MQE:RESULT_FLYING_SHEARING_ONE_X1}' ]
+#          datas:
+#            string:
+#              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_11_B2}'
+#              "FLYING_SHEARING_LAG_RATE": '{RT:YC_11_B3}'
+#              "FLYING_SHEARING_LENGTH": '{RT:YC_11_B4}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_SEPARETE_X1'
+#          tag: 'YC_1_B19'
+#          remark: '高线分钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_SEPARETE_X1}' ]
+#          datas:
+#            string:
+#              "SEPARATE_AREA": 'A'
+#              "SEPERATED_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_SEPARETE_X1'
+#          tag: 'YC_1_B20'
+#          remark: '高线分钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_SEPARETE_X1}' ]
+#          datas:
+#            string:
+#              "SEPARATE_AREA": 'B'
+#              "SEPERATED_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_MEDIATE_BITE_X1'
+#          tag: 'YC_2_B1'
+#          remark: '高线中轧咬钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_MEDIATE_BITE_X1}' ]
+#          datas:
+#            string:
+#              "ROLLING_MEDIATE_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "ROLLING_MEDIATE_BITE_TEMPERATURE_A": '{RT:YC_2_B2}'
+#              "ROLLING_MEDIATE_BITE_TEMPERATURE_B": '{RT:YC_2_B3}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FLYING_SHEARING_TWO_A_X1'
+#          tag: 'YC_12_B1'
+#          remark: '高线A线2#飞剪信号'
+#          destination: [ '{MQE:RESULT_FLYING_SHEARING_TWO_A_X1}' ]
+#          datas:
+#            string:
+#              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_12_B2}'
+#              "FLYING_SHEARING_LAG_RATE": '{RT:YC_12_B3}'
+#              "FLYING_SHEARING_LENGTH": '{RT:YC_12_B4}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FLYING_SHEARING_TWO_B_X1'
+#          tag: 'YC_14_B1'
+#          remark: '高线B线2#飞剪信号'
+#          destination: [ '{MQE:RESULT_FLYING_SHEARING_TWO_B_X1}' ]
+#          datas:
+#            string:
+#              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_14_B2}'
+#              "FLYING_SHEARING_LAG_RATE": '{RT:YC_14_B3}'
+#              "FLYING_SHEARING_LENGTH": '{RT:YC_14_B4}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_PRE_FINISH_BITE_A_X1'
+#          tag: 'YC_2_B28'
+#          remark: '高线A线预精轧咬钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_PRE_FINISH_BITE_A_X1}' ]
+#          datas:
+#            string:
+#              "ROLLING_PRE_FINISH_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_PRE_FINISH_BITE_B_X1'
+#          tag: 'YC_2_B53'
+#          remark: '高线B线预精轧咬钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_PRE_FINISH_BITE_B_X1}' ]
+#          datas:
+#            string:
+#              "ROLLING_PRE_FINISH_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FLYING_SHEARING_THREE_A_X1'
+#          tag: 'YC_13_B1'
+#          remark: '高线A线3#飞剪信号'
+#          destination: [ '{MQE:RESULT_FLYING_SHEARING_THREE_A_X1}' ]
+#          datas:
+#            string:
+#              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_13_B2}'
+#              "FLYING_SHEARING_LAG_RATE": '{RT:YC_13_B3}'
+#              "FLYING_SHEARING_LENGTH": '{RT:YC_13_B4}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_FLYING_SHEARING_THREE_B_X1'
+#          tag: 'YC_15_B1'
+#          remark: '高线B线3#飞剪信号'
+#          destination: [ '{MQE:RESULT_FLYING_SHEARING_THREE_B_X1}' ]
+#          datas:
+#            string:
+#              "FLYING_SHEARING_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "FLYING_SHEARING_TEMPERATURE": '{RT:YC_15_B2}'
+#              "FLYING_SHEARING_LAG_RATE": '{RT:YC_15_B3}'
+#              "FLYING_SHEARING_LENGTH": '{RT:YC_15_B4}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_FINISH_BITE_A_X1'
+#          tag: 'YC_2_B78'
+#          remark: '高线A线精轧咬钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_FINISH_BITE_A_X1}' ]
+#          datas:
+#            string:
+#              "ROLLING_FINISH_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "ROLLING_FINISH_BITE_TEMPERATURE": '{RT:YC_2_B79}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_FINISH_BITE_B_X1'
+#          tag: 'YC_2_B120'
+#          remark: '高线B线精轧咬钢信号'
+#          destination: [ '{MQE:RESULT_ROLLING_FINISH_BITE_B_X1}' ]
+#          datas:
+#            string:
+#              "ROLLING_FINISH_BITE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#            double:
+#              "ROLLING_FINISH_BITE_TEMPERATURE": '{RT:YC_2_B121}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_SPIN_START_A_X1'
+#          tag: 'YC_2_B162'
+#          remark: '高线A线吐丝机开始信号'
+#          destination: [ '{MQE:RESULT_ROLLING_SPIN_START_A_X1}' ]
+#          datas:
+#            string:
+#              "ROLLING_SPIN_START_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_SPIN_END_A_X1'
+#          tag: 'YC_2_B163'
+#          remark: '高线A线吐丝结束信号'
+#          destination: [ '{MQE:RESULT_ROLLING_SPIN_END_A_X1}' ]
+#          datas:
+#            string:
+#              "ROLLING_SPIN_END_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_SPIN_START_B_X1'
+#          tag: 'YC_2_B165'
+#          remark: '高线B线吐丝机开始信号'
+#          destination: [ '{MQE:RESULT_ROLLING_SPIN_START_B_X1}' ]
+#          datas:
+#            string:
+#              "ROLLING_SPIN_START_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_ROLLING_SPIN_END_B_X1'
+#          tag: 'YC_2_B166'
+#          remark: '高线B线吐丝结束信号'
+#          destination: [ '{MQE:RESULT_ROLLING_SPIN_END_B_X1}' ]
+#          datas:
+#            string:
+#              "ROLLING_SPIN_END_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COLLECTION_END_A_X1'
+#          tag: 'YC_2_B166'
+#          remark: '高线A线集卷结束信号'
+#          destination: [ '{MQE:RESULT_COLLECTION_END_A_X1}' ]
+#          datas:
+#            string:
+#              "COLLECTION_END_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_COLLECTION_END_B_X1'
+#          tag: 'YC_2_B166'
+#          remark: '高线B线集卷结束信号'
+#          destination: [ '{MQE:RESULT_COLLECTION_END_B_X1}' ]
+#          datas:
+#            string:
+#              "COLLECTION_END_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_BALER_END_A_X1'
+#          tag: 'YC_2_B166'
+#          remark: '高线A线打捆结束信号'
+#          destination: [ '{MQE:RESULT_BALER_END_A_X1}' ]
+#          datas:
+#            string:
+#              "BALER_END_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_BALER_END_B_X1'
+#          tag: 'YC_2_B166'
+#          remark: '高线B线打捆结束信号'
+#          destination: [ '{MQE:RESULT_BALER_END_B_X1}' ]
+#          datas:
+#            string:
+#              "BALER_END_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_UNCOLING_END_A_X1'
+#          tag: 'YC_2_B166'
+#          remark: '高线A线卸卷结束信号'
+#          destination: [ '{MQE:RESULT_UNCOLING_END_A_X1}' ]
+#          datas:
+#            string:
+#              "UNCOLING_END_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'RESULT_UNCOLING_END_B_X1'
+#          tag: 'YC_2_B166'
+#          remark: '高线B线卸卷结束信号'
+#          destination: [ '{MQE:RESULT_UNCOLING_END_B_X1}' ]
+#          datas:
+#            string:
+#              "UNCOLING_END_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'BLT_ELEVATOR_UP_B3'
+#          tag: 'YC_10_B2'
+#          remark: '高线提升机提升信号'
+#          destination: [ '{MQE:BLT_ELEVATOR_UP_B3}' ]
+#          datas:
+#            string:
+#              "ELEVATOR_UP_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'BLT_STORE_PUSH_B3'
+#          tag: 'YC_10_B1,'
+#          remark: '高线冷坯推钢信号'
+#          destination: [ '{MQE:BLT_STORE_PUSH_B3}' ]
+#          datas:
+#            string:
+#              "STORE_PUSH_AT": '{TMP:yyyyMMddHHmmssSSS}'
+#        - trigger: '#oldData.value == false and #newData.value == true'
+#          code: 'BLT_REMOVE_WASTE_B3'
+#          tag: 'YC_10_B3,'
+#          remark: '高线剔废信号'
+#          destination: [ '{MQE:BLT_REMOVE_WASTE_B3}' ]
+#          datas:
+#            string:
+#              "REMOVE_WASTE_AT": '{TMP:yyyyMMddHHmmssSSS}'
+
+
+
+
+
+
